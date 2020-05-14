@@ -8,6 +8,9 @@
 #   2. La empresa ejecuta el trabajo de lavado
 #   3. Cuando la mascota está lista, la empresa contacta al cliente por mensaje de texto
 #       para informarle que ya puede retirar a su mascota.
+from Models import PetWashJob
+from Respository.RepositoriesBase import MemoryRepository
+from Notifier.INotifier import INotifier
 
 
 class PetWash:
@@ -15,18 +18,19 @@ class PetWash:
     PetWash Class
     Objeto principal del proceso, de recepción, lavado y retorno de mascota
     """
-    def __init__(self, repository, notifier):
+    def __init__(self, repository: MemoryRepository, notifier: INotifier):
         """
         Constructor de la clase
+        :param repository:
+        :param notifier:
         """
         self.repository = repository
         self.notifier = notifier
 
-    def require_pet_wash(self, job):
+    def require_pet_wash(self, job: PetWashJob):
         """
         Recepción de la mascota
-        :param pet: Objeto con información de la Mascota
-        :param customer: Objeto con información del cliente
+        :param job:
         :return: Identificador unico del servicio
         """
         identifier = self.repository.put(job)

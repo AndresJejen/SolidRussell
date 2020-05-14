@@ -22,7 +22,7 @@ class PetWash:
     """
     def __init__(self, token):
         self.repository = MemoryRepository()  # Dependencia Implicita
-        self.notifier = SMSNotifier(token)   # Dependencia Implicita
+        self.notifier = SMSNotifier(token)    # Dependencia Implicita
 
     def require_pet_wash(self, pet, customer):
         """

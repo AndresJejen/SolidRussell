@@ -4,6 +4,7 @@ from Solid2 import PetWash as PetWash2
 from Solid3 import PetWash as PetWash3
 from Solid4 import PetWash as PetWash4
 
+
 # Models
 from Models.Customer import Customer
 from Models.Pet import Pet
@@ -14,6 +15,7 @@ from Notifier.NotifiersBase.SMSNotifier import SMSNotifier
 from Respository.RepositoriesBase.MemoryRepository import MemoryRepository
 from Notifier.NotifiersImplementation.NotifierSMSImplementation import NotifierSMSImplementation
 from Notifier.NotifiersImplementation.NotifierEmailImplementation import NotifierEmailImplementation
+
 
 def main():
     """
@@ -27,14 +29,14 @@ def main():
     # Procesador = PetWash2(1234)
 
     ## mas Inversión de las dependencias
-    # repository = MemoryRepository()
-    # notifier = SMSNotifier(1234)
-    # Procesador = PetWash3(repository,notifier)
+    #repository = MemoryRepository()
+    #notifier = SMSNotifier(1234)
+    #Procesador = PetWash3(repository, notifier)
 
     ## mas Open Close
     repository = MemoryRepository()
-    notifier = NotifierSMSImplementation(token=12345)
-    #notifier = NotifierEmailImplementation(token=12345)
+    #notifier = NotifierSMSImplementation(token=12345)
+    notifier = NotifierEmailImplementation(token=12345)
     Procesador = PetWash4(repository, notifier)
 
     # Procesador = PetWash5(1234)   # mas Liskov
@@ -55,11 +57,13 @@ def main():
         print("Customer Info", customer.get_info())
         print("Pet Info", pet.get_info())
 
-        # jobIdentifier = Procesador.require_pet_wash(pet, person) # Para Solid1 and Solid 2
+        #jobIdentifier = Procesador.require_pet_wash(pet, customer) # Para Solid1 and Solid 2
 
-        # job = PetWashJob(pet, customer, 'new job')  # Para Inversión de dependencias, open_close
-        # jobIdentifier = Procesador.require_pet_wash(job)
+        job = PetWashJob(pet, customer, 'new job')  # Para Inversión de dependencias, open_close
+        jobIdentifier = Procesador.require_pet_wash(job)
 
+        variable: str = 23
+        print(variable, type(variable))
 
         Procesador.wash_completed(jobIdentifier)
 

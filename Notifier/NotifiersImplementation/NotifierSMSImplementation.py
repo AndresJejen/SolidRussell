@@ -1,5 +1,7 @@
 from Notifier.INotifier import INotifier
-from Notifier.NotifiersBase.SMSNotifier import SMSNotifier
+#from Notifier.NotifiersBase.SMSNotifier import SMSNotifier
+
+from ..NotifiersBase import EmailNotifier, SMSNotifier
 
 
 class NotifierSMSImplementation(INotifier):
